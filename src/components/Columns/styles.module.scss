@@ -1,0 +1,8 @@
+.columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2% 2% 2% 2%;
+    background-color: var(--background-color);
+    gap: 2%;
+}

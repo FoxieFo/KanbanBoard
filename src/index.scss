@@ -6,8 +6,22 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
+.app__container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app__container > main {
+  flex: 1;
+}
+
 :root {
-  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 }
@@ -17,6 +31,7 @@
   --header-footer: #0067A3;
   --text: #FFFFFF;
   --list-background: #EBECF0;
+  --list-task-background: #ffffff;
   --list-text: #000000;
   --list-addcard-text: #5E6C84;
   --switcher-background: #DCE0E6;
@@ -28,7 +43,8 @@
   --background-color: #1E1E1E;
   --header-footer: #333333;
   --text: #E0E0E0;
-  --list-background: #2C2C2C;
+  --list-background: #535353;
+  --list-task-background: #7d7d7d;
   --list-text: #FFFFFF;
   --list-addcard-text: #B0B0B0;
   --switcher-background: #333333;

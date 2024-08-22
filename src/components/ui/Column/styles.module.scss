@@ -1,0 +1,28 @@
+.column {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--list-background);
+        border-radius: 10px;
+        padding: 12px;
+        gap: 15px;
+        color: var(--list-text);
+        height: 100%;
+        width: 90%;
+    }
+    &__title {
+        text-transform: uppercase;
+    }
+    &__task {
+        background-color: var(--list-task-background);
+        border-radius: 5px;
+        padding: 8px;
+    }
+    &__button {
+        border: none;
+        background: none;
+        color: var(--list-text);
+        cursor: pointer;
+        align-self: flex-start;
+    }
+}

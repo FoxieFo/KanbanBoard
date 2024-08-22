@@ -1,19 +1,15 @@
 import ThemeSwitcher from "../ui/ThemeSwitcher/ThemeSwitcher";
+import s from './styles.module.scss';
 
-import useLocalStorage from "use-local-storage";
-
-import s from './styles.module.scss'
-
-export default function Header() {
-    const [isDark, setIsDark] = useLocalStorage("isDark", false)
-
+export default function Header({ isDark, setIsDark }) {
     return (
-        <header className={s.header__container} data-theme={isDark ? "dark" : "light"}>
+        <header className={s.header__container}>
             <p className={s.header__text}>Awesome Kanban Board</p>
             <ThemeSwitcher
                 isChecked={isDark}
                 handleChange={() => setIsDark(!isDark)}
             />
+            <div className={s.header__profile}></div>
         </header>
     );
 }

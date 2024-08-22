@@ -2,5 +2,14 @@
     &__container {
         background-color: var(--header-footer);
         color: var(--text);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 17px;
+        font-size: 18px;
+    }
+    &__counter {
+        display: flex;
+        gap: clamp(1.563rem, 1.313rem + 1.25vw, 2.25rem);
     }
 }
