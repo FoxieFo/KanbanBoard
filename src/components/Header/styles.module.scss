@@ -1,9 +1,17 @@
 .header {
     &__container {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        justify-content: space-between;
         background-color: var(--header-footer);
         color: var(--text);
+        font-size: 28px;
     }
     &__profile {
-        
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
     }
 }
