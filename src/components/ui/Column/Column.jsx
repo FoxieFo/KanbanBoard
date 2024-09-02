@@ -52,6 +52,12 @@ export default function Column({ title }) {
         updateLocalStorage(title, updatedTasks);
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleAddTaskClick();
+        }
+    };
+
     const updateLocalStorage = (columnTitle, updatedTasks) => {
         const savedTasks = JSON.parse(localStorage.getItem('tasks')) || {};
         savedTasks[columnTitle] = updatedTasks;
@@ -81,6 +87,7 @@ export default function Column({ title }) {
                             type="text" 
                             value={newTaskTitle} 
                             onChange={handleInputChange} 
+                            onKeyDown={handleKeyDown}
                             placeholder="Enter task title"
                             className={s.column__input}
                         />
