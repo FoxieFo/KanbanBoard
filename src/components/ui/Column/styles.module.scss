@@ -23,6 +23,11 @@
         border: none;
         padding: 4px;
         border-radius: 5px;
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
     }
     &__deleteButton {
         position: absolute;
