@@ -36,7 +36,8 @@ html, body {
   --list-addcard-text: #5E6C84;
   --switcher-background: #DCE0E6;
   --switcher-slider: #88bff6;
-  --switcher-active: #0079BF; 
+  --switcher-active: #0079BF;
+  --button-hover-bg: #d0e4f6; // Легкий светлый фон
 }
 
 [data-theme="dark"] {
@@ -50,4 +51,5 @@ html, body {
   --switcher-background: #333333;
   --switcher-slider: #151522;
   --switcher-active: #1c313e;
+  --button-hover-bg: #434343;
 }

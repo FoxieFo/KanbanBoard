@@ -1,0 +1,31 @@
+.cardButton {
+    &__container {
+        padding: 3px;
+    }
+
+    &__button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: var(--list-text);
+        align-self: flex-start;
+        padding: 5px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+
+        &:not(:disabled) {
+            background-color: var(--button-bg);
+            
+            &:hover {
+                background-color: var(--button-hover-bg);
+                color: var(--button-hover-text);
+            }
+        }
+
+        &:disabled {
+            background-color: var(--button-disabled-bg);
+            color: var(--button-disabled-text);
+            cursor: not-allowed;
+        }
+    }
+}

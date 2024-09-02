@@ -8,21 +8,35 @@
         gap: 15px;
         color: var(--list-text);
         height: 100%;
-        width: 90%;
+        width: 100%;
+        position: relative;
     }
-    &__title {
-        text-transform: uppercase;
+    &__taskContainer {
+        position: relative;
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
     }
     &__task {
-        background-color: var(--list-task-background);
-        border-radius: 5px;
-        padding: 8px;
+        padding-right: 3%;
     }
-    &__button {
+    &__input {
         border: none;
+        padding: 4px;
+        border-radius: 5px;
+    }
+    &__deleteButton {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
         background: none;
-        color: var(--list-text);
+        border: none;
         cursor: pointer;
-        align-self: flex-start;
+        color: var(--list-addcard-text);
+        font-size: 16px;
+
+        &:hover {
+            color: var(--button-hover-text);
+        }
     }
 }
