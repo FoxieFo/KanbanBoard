@@ -1,17 +1,11 @@
 import s from './styles.module.scss';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import CardButton from '../CardButton/CardButton';
 
-export default function Column({ title }) {
-    const [tasks, setTasks] = useState([]);
+export default function Column({ title, tasks = [], setTasks, isBacklog, onNewTask }) {
     const [isAdding, setIsAdding] = useState(false);
     const [newTaskTitle, setNewTaskTitle] = useState('');
     const formRef = useRef(null);
-
-    useEffect(() => {
-        const savedTasks = JSON.parse(localStorage.getItem('tasks')) || {};
-        setTasks(savedTasks[title] || []);
-    }, [title]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -22,40 +16,25 @@ export default function Column({ title }) {
         };
 
         document.addEventListener('mousedown', handleClickOutside);
-
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
 
     const handleAddTaskClick = () => {
-        if (isAdding) {
-            if (newTaskTitle.trim()) {
-                const updatedTasks = [...tasks, newTaskTitle];
-                setTasks(updatedTasks);
-                setNewTaskTitle('');
-                setIsAdding(false);
-                updateLocalStorage(title, updatedTasks);
-            }
+        if (newTaskTitle.trim()) {
+            onNewTask(newTaskTitle); // Add task to newTasks array and keep it in Backlog
+            setNewTaskTitle(''); // Clear the input field
+            setIsAdding(false); // Close the input field
         } else {
             setIsAdding(true);
         }
-    };
-
-    const handleInputChange = (event) => {
-        setNewTaskTitle(event.target.value);
     };
 
     const handleDeleteTask = (index) => {
         const updatedTasks = tasks.filter((_, taskIndex) => taskIndex !== index);
         setTasks(updatedTasks);
         updateLocalStorage(title, updatedTasks);
-    };
-
-    const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            handleAddTaskClick();
-        }
     };
 
     const updateLocalStorage = (columnTitle, updatedTasks) => {
@@ -69,9 +48,7 @@ export default function Column({ title }) {
             <span className={s.column__title}>{title}</span>
             {tasks.map((task, index) => (
                 <div key={index} className={s.column__taskContainer}>
-                    <p className={s.column__task}>
-                        {task}
-                    </p>
+                    <p className={s.column__task}>{task}</p>
                     <button 
                         className={s.column__deleteButton}
                         onClick={() => handleDeleteTask(index)}
@@ -80,29 +57,30 @@ export default function Column({ title }) {
                     </button>
                 </div>
             ))}
-            <div ref={formRef}>
-                {isAdding ? (
-                    <>
-                        <input 
-                            type="text" 
-                            value={newTaskTitle} 
-                            onChange={handleInputChange} 
-                            onKeyDown={handleKeyDown}
-                            placeholder="Enter task title"
-                            className={s.column__input}
-                        />
+            {isBacklog && (
+                <div ref={formRef}>
+                    {isAdding ? (
+                        <>
+                            <input 
+                                type="text" 
+                                value={newTaskTitle} 
+                                onChange={(e) => setNewTaskTitle(e.target.value)} 
+                                placeholder="Enter task title"
+                                className={s.column__input}
+                            />
+                            <CardButton 
+                                buttonText="Submit" 
+                                onClick={handleAddTaskClick}
+                            />
+                        </>
+                    ) : (
                         <CardButton 
-                            buttonText="Submit" 
-                            onClick={handleAddTaskClick}
+                            buttonText="+ Add card" 
+                            onClick={() => setIsAdding(true)}
                         />
-                    </>
-                ) : (
-                    <CardButton 
-                        buttonText="+ Add card" 
-                        onClick={handleAddTaskClick}
-                    />
-                )}
-            </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 }

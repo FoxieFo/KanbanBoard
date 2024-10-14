@@ -1,0 +1,78 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+    &__toggle {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    &__menu {
+        position: absolute;
+        top: 37px;
+        right: 0;
+        width: 8rem;
+        font-size: 1rem;
+        border: 1px solid #f1f1f155;
+        background-color: var(--list-task-background);
+        color: var(--list-text);
+        cursor: pointer;
+        border-radius: 5px;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+        z-index: 1;
+    }
+
+    &__menu_active {
+        max-height: 5rem;
+        opacity: 1;
+    }
+
+    &__item {
+        padding: 0.5rem;
+        cursor: pointer;
+        &:hover {
+            background-color: #f1f1f155;
+        }
+    }
+
+    .arrow {
+        width: 13px;
+        height: 13px;
+        display: inline-block;
+        position: relative;
+        transition: 0.4s ease;
+        transform: rotate(0);
+        &:before, &:after {
+            position: absolute;
+            content: '';
+            display: inline-block;
+            width: 3px;
+            height: 10px;
+            background-color: transparent;
+            border-bottom: 12px solid #fff;
+            top: 0;
+            left: 0;
+            transition: 0.4s ease;
+        }
+        &:before {
+            transform: rotate(-135deg);
+        }
+        &:after {
+            transform: rotate(135deg);
+        }
+    }
+
+    &.active .arrow {
+        transform: translate(0, -6px);
+        &:before {
+            transform: rotate(-45deg);
+        }
+        &:after {
+            transform: rotate(45deg);
+        }
+    }
+}
