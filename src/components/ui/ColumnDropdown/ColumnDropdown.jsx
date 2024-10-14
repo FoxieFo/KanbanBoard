@@ -24,6 +24,7 @@ export default function ColumnDropdown({ previousTasks = [], onTaskSelect }) {
     return (
         <div className={`${s.dropdown} ${isOpen ? s.active : ''}`} ref={dropdownRef}>
             <div className={s.dropdown__toggle} onClick={toggleDropdown}>
+                <span>Choose the task</span>
                 <div className={s.arrow}></div>
             </div>
             <div className={`${s.dropdown__menu} ${isOpen ? s.dropdown__menu_active : ''}`}>

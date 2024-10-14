@@ -1,8 +1,9 @@
 import s from './styles.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import CardButton from '../CardButton/CardButton';
+import ColumnDropdown from '../ColumnDropdown/ColumnDropdown'; // Импортируем выпадающий список
 
-export default function Column({ title, tasks = [], setTasks, isBacklog, onNewTask }) {
+export default function Column({ title, tasks = [], setTasks, isBacklog, onNewTask, newTasks, onTaskSelect }) {
     const [isAdding, setIsAdding] = useState(false);
     const [newTaskTitle, setNewTaskTitle] = useState('');
     const formRef = useRef(null);
@@ -23,9 +24,9 @@ export default function Column({ title, tasks = [], setTasks, isBacklog, onNewTa
 
     const handleAddTaskClick = () => {
         if (newTaskTitle.trim()) {
-            onNewTask(newTaskTitle); // Add task to newTasks array and keep it in Backlog
-            setNewTaskTitle(''); // Clear the input field
-            setIsAdding(false); // Close the input field
+            onNewTask(newTaskTitle);
+            setNewTaskTitle('');
+            setIsAdding(false);
         } else {
             setIsAdding(true);
         }
@@ -80,6 +81,12 @@ export default function Column({ title, tasks = [], setTasks, isBacklog, onNewTa
                         />
                     )}
                 </div>
+            )}
+            {title === 'Ready' && newTasks.length > 0 && (
+                <ColumnDropdown 
+                    previousTasks={newTasks} 
+                    onTaskSelect={onTaskSelect} 
+                />
             )}
         </div>
     );

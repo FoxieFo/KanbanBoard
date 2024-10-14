@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Column from '../ui/Column/Column';
 import s from './styles.module.scss';
-import ColumnDropdown from '../ui/ColumnDropdown/ColumnDropdown'; // Import the dropdown component
+import ColumnDropdown from '../ui/ColumnDropdown/ColumnDropdown';
 
 export default function Columns() {
     const [tasks, setTasks] = useState({
@@ -10,7 +10,7 @@ export default function Columns() {
         InProgress: [],
         Finished: []
     });
-    const [newTasks, setNewTasks] = useState([]); // Store new tasks temporarily
+    const [newTasks, setNewTasks] = useState([]);
 
     useEffect(() => {
         const savedTasks = localStorage.getItem('tasks');
@@ -20,20 +20,20 @@ export default function Columns() {
     }, []);
 
     const handleNewTask = (task) => {
-        setNewTasks((prevTasks) => [...prevTasks, task]); // Add task to newTasks array
+        setNewTasks((prevTasks) => [...prevTasks, task]);
         setTasks((prevTasks) => ({
             ...prevTasks,
-            Backlog: [...prevTasks.Backlog, task] // Keep it in Backlog
+            Backlog: [...prevTasks.Backlog, task]
         }));
     };
 
     const handleTaskSelect = (selectedTask) => {
         setTasks((prevTasks) => ({
             ...prevTasks,
-            Ready: [...prevTasks.Ready, selectedTask], // Move selected task to Ready
-            Backlog: prevTasks.Backlog.filter(task => task !== selectedTask) // Remove from Backlog
+            Ready: [...prevTasks.Ready, selectedTask],
+            Backlog: prevTasks.Backlog.filter(task => task !== selectedTask)
         }));
-        setNewTasks((prevTasks) => prevTasks.filter(task => task !== selectedTask)); // Remove from newTasks
+        setNewTasks((prevTasks) => prevTasks.filter(task => task !== selectedTask));
     };
 
     return (
@@ -49,15 +49,9 @@ export default function Columns() {
                 title={'Ready'} 
                 tasks={tasks.Ready} 
                 setTasks={(newReadyTasks) => setTasks({...tasks, Ready: newReadyTasks})} 
+                newTasks={newTasks} // Передаем newTasks
+                onTaskSelect={handleTaskSelect} // Передаем обработчик
             />
-
-            {newTasks.length > 0 && (
-                <ColumnDropdown 
-                    previousTasks={newTasks} // Pass the array of new tasks
-                    onTaskSelect={handleTaskSelect}
-                />
-            )}
-
             <Column 
                 title={'In Progress'} 
                 tasks={tasks.InProgress} 
