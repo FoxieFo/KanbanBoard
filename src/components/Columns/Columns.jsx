@@ -1,23 +1,16 @@
 import { useState, useEffect } from 'react';
+import useLocalStorage from "use-local-storage";
 import Column from '../ui/Column/Column';
 import s from './styles.module.scss';
-import ColumnDropdown from '../ui/ColumnDropdown/ColumnDropdown';
 
 export default function Columns() {
-    const [tasks, setTasks] = useState({
+    const [tasks, setTasks] = useLocalStorage("tasks", {
         Backlog: [],
         Ready: [],
         InProgress: [],
         Finished: []
     });
     const [newTasks, setNewTasks] = useState([]);
-
-    useEffect(() => {
-        const savedTasks = localStorage.getItem('tasks');
-        if (savedTasks) {
-            setTasks(JSON.parse(savedTasks));
-        }
-    }, []);
 
     const handleNewTask = (task) => {
         setNewTasks((prevTasks) => [...prevTasks, task]);
@@ -28,17 +21,15 @@ export default function Columns() {
     };
 
     const handleTaskSelect = (selectedTask, fromColumn, toColumn) => {
-        // Проверяем, что обе колонки - это массивы
         const fromTasks = Array.isArray(tasks[fromColumn]) ? tasks[fromColumn] : [];
         const toTasks = Array.isArray(tasks[toColumn]) ? tasks[toColumn] : [];
 
         setTasks((prevTasks) => ({
             ...prevTasks,
-            [toColumn]: [...toTasks, selectedTask], // Добавляем выбранную задачу в целевую колонку
-            [fromColumn]: fromTasks.filter(task => task !== selectedTask) // Убираем задачу из исходной колонки
+            [toColumn]: [...toTasks, selectedTask],
+            [fromColumn]: fromTasks.filter(task => task !== selectedTask) 
         }));
 
-        // Убираем задачу из массива newTasks, если она перемещена из Backlog
         if (fromColumn === 'Backlog') {
             setNewTasks((prevTasks) => prevTasks.filter(task => task !== selectedTask));
         }
@@ -57,22 +48,22 @@ export default function Columns() {
                 title={'Ready'} 
                 tasks={tasks.Ready} 
                 setTasks={(newReadyTasks) => setTasks({...tasks, Ready: newReadyTasks})} 
-                newTasks={tasks.Backlog} // Задачи для перемещения из Backlog
-                onTaskSelect={(task) => handleTaskSelect(task, 'Backlog', 'Ready')} // Перемещение из Backlog в Ready
+                newTasks={tasks.Backlog}
+                onTaskSelect={(task) => handleTaskSelect(task, 'Backlog', 'Ready')}
             />
             <Column 
                 title={'In Progress'} 
                 tasks={tasks.InProgress} 
                 setTasks={(newInProgressTasks) => setTasks({...tasks, InProgress: newInProgressTasks})} 
-                newTasks={tasks.Ready} // Задачи для перемещения из Ready
-                onTaskSelect={(task) => handleTaskSelect(task, 'Ready', 'InProgress')} // Перемещение из Ready в In Progress
+                newTasks={tasks.Ready}
+                onTaskSelect={(task) => handleTaskSelect(task, 'Ready', 'InProgress')}
             />
             <Column 
                 title={'Finished'} 
                 tasks={tasks.Finished} 
                 setTasks={(newFinishedTasks) => setTasks({...tasks, Finished: newFinishedTasks})} 
-                newTasks={tasks.InProgress} // Задачи для перемещения из In Progress
-                onTaskSelect={(task) => handleTaskSelect(task, 'InProgress', 'Finished')} // Перемещение из In Progress в Finished
+                newTasks={tasks.InProgress}
+                onTaskSelect={(task) => handleTaskSelect(task, 'InProgress', 'Finished')}
             />
         </main>
     );

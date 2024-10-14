@@ -1,7 +1,7 @@
 import s from './styles.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import CardButton from '../CardButton/CardButton';
-import ColumnDropdown from '../ColumnDropdown/ColumnDropdown'; // Импортируем выпадающий список
+import ColumnDropdown from '../ColumnDropdown/ColumnDropdown';
 
 export default function Column({ title, tasks = [], setTasks, isBacklog, onNewTask, newTasks, onTaskSelect }) {
     const [isAdding, setIsAdding] = useState(false);

@@ -5,4 +5,16 @@
     padding: 2% 2% 2% 2%;
     background-color: var(--background-color);
     gap: 2%;
+    @media (max-width: 1000px){
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 15px;
+        justify-items: center;
+        align-items: center;
+    }
+    @media (max-width: 650px){
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 }

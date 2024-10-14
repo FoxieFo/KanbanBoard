@@ -5,7 +5,6 @@ import useLocalStorage from "use-local-storage";
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Columns from './components/Columns/Columns';
-import ColumnDropdown from './components/ui/ColumnDropDown/ColumnDropdown';
 
 
 function App() {
