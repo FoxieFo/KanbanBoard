@@ -82,7 +82,7 @@ export default function Column({ title, tasks = [], setTasks, isBacklog, onNewTa
                     )}
                 </div>
             )}
-            {title === 'Ready' && newTasks.length > 0 && (
+            {newTasks && newTasks.length > 0 && (
                 <ColumnDropdown 
                     previousTasks={newTasks} 
                     onTaskSelect={onTaskSelect} 
