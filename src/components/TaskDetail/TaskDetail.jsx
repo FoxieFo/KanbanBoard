@@ -34,7 +34,6 @@ export default function TaskDetail() {
     return (
         <div className={s.taskDetail}>
             <button className={s.taskDetail__closeButton} onClick={() => navigate('/')}>×</button>
-            <h1>{task.title}</h1>
             <textarea 
                 className={s.taskDetail__textarea}
                 value={description} 

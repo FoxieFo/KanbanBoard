@@ -2,6 +2,7 @@ import s from './styles.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import CardButton from '../CardButton/CardButton';
 import ColumnDropdown from '../ColumnDropdown/ColumnDropdown';
+import { Link } from 'react-router-dom';
 
 export default function Column({ title, tasks = [], setTasks, isBacklog, onNewTask, newTasks, onTaskSelect }) {
     const [isAdding, setIsAdding] = useState(false);
@@ -46,18 +47,20 @@ export default function Column({ title, tasks = [], setTasks, isBacklog, onNewTa
 
     return (
         <div className={s.column__container}>
-            <span className={s.column__title}>{title}</span>
-            {tasks.map((task, index) => (
-                <div key={index} className={s.column__taskContainer}>
+        <span className={s.column__title}>{title}</span>
+        {tasks.map((task, index) => (
+            <div key={index} className={s.column__taskContainer}>
+                <Link to={`/tasks/${index}`} className={s.column__taskLink}>
                     <p className={s.column__task}>{task}</p>
-                    <button 
-                        className={s.column__deleteButton}
-                        onClick={() => handleDeleteTask(index)}
-                    >
-                        ×
-                    </button>
-                </div>
-            ))}
+                </Link>
+                <button 
+                    className={s.column__deleteButton}
+                    onClick={() => handleDeleteTask(index)}
+                >
+                    ×
+                </button>
+            </div>
+        ))}
             {isBacklog && (
                 <div ref={formRef}>
                     {isAdding ? (

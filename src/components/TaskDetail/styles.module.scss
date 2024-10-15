@@ -1,0 +1,33 @@
+.taskDetail{
+    height: 90vh;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    &__closeButton{
+        font-size: 60px;
+        color: var(--list-task-background);
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    &__textarea{
+        resize: none;
+        margin: 20px;
+        padding: 20px;
+        height: 50vh;
+        border-radius: 5px;
+    }
+    &__saveButton{
+        padding: 10px;
+        width: 200px;
+        margin-left: 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        background-color: var(--list-task-background);
+        transition: background-color 0.2s ease-in-out;
+        &:hover{
+            background-color: var(--list-background);
+        }
+    }
+}
