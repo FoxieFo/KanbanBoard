@@ -19,6 +19,14 @@
     }
     &__task {
         padding-right: 3%;
+        &Link{
+            color: var(--list-text);
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+            &:hover{
+                color: var(--list-addcard-text);
+            }
+        }
     }
     &__input {
         width: 100%;
