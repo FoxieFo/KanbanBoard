@@ -22,15 +22,6 @@ export default function TaskDetail() {
         setDescription(e.target.value);
     };
 
-    const handleSave = () => {
-        const updatedTasks = JSON.parse(localStorage.getItem('tasks')) || {};
-        const column = updatedTasks.Backlog[taskId] ? 'Backlog' : updatedTasks.Ready[taskId] ? 'Ready' : updatedTasks.InProgress[taskId] ? 'InProgress' : 'Finished';
-        
-        updatedTasks[column][taskId] = { ...updatedTasks[column][taskId], description };
-        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-        navigate('/');
-    };
-
     return (
         <div className={s.taskDetail}>
             <button className={s.taskDetail__closeButton} onClick={() => navigate('/')}>×</button>
@@ -40,7 +31,6 @@ export default function TaskDetail() {
                 onChange={handleDescriptionChange} 
                 placeholder="This task has no description"
             />
-            <button onClick={handleSave} className={s.taskDetail__saveButton}>Save</button>
         </div>
     );
 }
